@@ -1,0 +1,25 @@
+# 后端框架
+fastapi==0.104.1
+uvicorn==0.24.0
+
+# 大模型相关
+langchain==0.1.0
+langchain-openai==0.0.2
+openai==1.6.1
+
+# 前端界面
+streamlit==1.29.0
+requests==2.31.0
+
+# 环境配置
+python-dotenv==1.0.0
+
+# 文档解析
+PyPDF2==3.0.1
+python-docx==0.8.11
+python-pptx==0.6.23
+pandas==2.1.4
+openpyxl==3.1.2
+
+# 语音转写
+openai-whisper==1.1.1
