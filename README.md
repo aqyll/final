@@ -1,184 +1,96 @@
-# 📚 全格式文档智能摘要与问答系统 —— 毕业设计项目
+# 智能文档处理与问答系统
+基于 Streamlit + FastAPI + DeepSeek + Whisper 开发的全格式文件解析、智能摘要、多轮问答工具。
+支持 PDF / Word / Excel / PPT / 音频 / 视频等格式，可离线解析、联网生成智能回答。
 
-**基于 LangChain \+ DeepSeek LLM \+ Whisper 语音解析的多模态智能文档分析系统**
+## ✨ 功能特性
+- 📄 **全格式文件解析**
+  支持：pdf, docx, xlsx, pptx, txt, mp3, m4a, wav, mp4, mov, avi, mkv 等
+- 🔍 **智能摘要生成**
+  使用 DeepSeek 大模型自动生成结构化、简洁的内容摘要
+- 💬 **智能文档问答**
+  基于文件内容精准回答，支持跨文档知识问答
+- 🌍 **通用问答能力**
+  无需上传文件，直接进行 AI 对话
+- 📜 **历史记录管理**
+  查看历史问答，支持展开/收起完整回答
+- 🎯 **界面清晰易用**
+  左侧上传 + 右侧摘要 + 下方问答 + 历史页面切换
 
-支持 Word / Excel / PPT / PDF / 视频 / 音频 全格式文件智能摘要、智能问答，可精准解析表格、文本、语音内容并回答细节问题。
+## 🏗 项目结构
+final/├── backend/│ ├── main.py # FastAPI 后端服务│ └── .env # 密钥配置（DEEPSEEK_API_KEY、URL）├── frontend/│ └── app.py # Streamlit 前端界面├── requirements.txt # 依赖包└── README.md # 项目说明
+plaintext
 
----
+## 🚀 快速启动
 
-## ✨ 项目简介
-
-传统文档系统仅支持单一文本格式，无法解析表格、幻灯片、视频、音频内容。本项目基于大语言模型，实现了**全格式文件统一解析、智能摘要、细节问答**功能。
-
-系统可对用户上传的任意文档、视频、音频进行智能理解，自动生成结构化摘要，并支持用户针对文档细节进行精准问答，解决传统系统无法读取表格细节、无法解析音视频内容的痛点。
-
-### 🎯 核心功能
-
-- **多格式文件解析**：支持 PDF、Word\(\.docx\)、Excel\(\.xlsx\)、PPT\(\.pptx\)、MP4、M4A、MP3、WAV
-
-- **智能内容摘要**：自动总结文件核心内容，生成简洁专业摘要
-
-- **细节智能问答**：支持表格、文本、字幕细节精准问答，不编造内容
-
-- **音视频语音转文字**：基于 Whisper 实现真实语音识别，提取视频音频台词
-
-- **历史记录管理**：保存所有摘要、问答记录，支持查看与清空
-
-- **前后端分离架构**：FastAPI 后端 \+ Streamlit 可视化前端
-
----
-
-## 🛠️ 技术栈
-
-#### 后端技术
-
-- **FastAPI**：高性能后端接口框架
-
-- **LangChain**：大模型应用调度框架
-
-- **DeepSeek LLM**：智能文本生成与问答大模型
-
-- **OpenAI\-Whisper**：音视频语音转文字
-
-- **FFmpeg**：多媒体解码依赖
-
-- **PyPDF2 / python\-docx / python\-pptx / pandas**：全格式文档解析
-
-#### 前端技术
-
-- **Streamlit**：快速搭建可视化 AI 应用界面
-
-- **Requests**：前后端接口通信
-
----
-
-## 📁 项目结构
-
-```plain text
-final/
-├── backend/
-│   └── main.py        # 后端核心接口（解析、摘要、问答）
-├── frontend/
-│   └── app.py        # 前端可视化页面
-├── .env              # 密钥配置文件
-└── README.md         # 项目说明文档
-
-```
-
----
-
-## ⚙️ 环境依赖配置
-
-### 1\. Python 环境
-
-建议使用 Anaconda Python3\.10\+
-
-### 2\. 安装全部依赖
-
+### 1. 安装依赖
 ```bash
-D:\Anaconda3\python.exe -m pip install fastapi uvicorn streamlit requests python-dotenv langchain langchain-openai PyPDF2 python-docx python-pptx pandas openpyxl openai-whisper
-
+pip install -r requirements.txt
 ```
-
-### 3\. 安装 FFmpeg（音视频解析必备）
-
-方式一（管理员 PowerShell）：
-
-```powershell
-winget install ffmpeg
-
-```
-
-安装完成后重启终端，输入 `ffmpeg \-version` 验证。
-
-### 4\. 配置环境变量 \.env 文件
-
-在项目根目录新建 `\.env` 文件：
-
-```env
+2. 配置 .env 文件（backend 目录下）
+```bash
 DEEPSEEK_API_KEY=你的DeepSeek密钥
-
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=你的LangSmith密钥
 ```
-
----
-
-## 🚀 项目启动方式
-
-### 第一步：启动后端服务
-
+3. 启动后端
 ```bash
-D:\Anaconda3\python.exe D:\final\backend\main.py
-
+python backend/main.py
 ```
-
-后端运行地址：`http://localhost:8000`
-
-### 第二步：启动前端页面
-
+4. 启动前端
 ```bash
-streamlit run D:\final\frontend\app.py
-
+streamlit run frontend/app.py
 ```
+📌 **使用说明**
 
----
+左侧上传任意支持的文件
 
-## 📌 系统功能流程
+点击「生成摘要」获取文档总结
 
-1. **文件上传**：左侧边栏上传任意支持格式文件
+在下方输入框提问，支持：
 
-2. **智能解析**：后端自动解析文本、表格、幻灯片、音视频字幕内容
+基于文档内容的问题
 
-3. **内容摘要**：大模型根据完整文件内容生成精准摘要
+与文档无关的通用问题
 
-4. **智能问答**：用户提问细节问题，系统基于原文精准作答，不编造信息
+点击「浏览历史」查看所有问答记录
 
-5. **记录保存**：所有操作自动存入历史记录，支持随时查看
+点击「返回摘要」回到主界面
 
----
+🧩 **支持格式**
 
-## ✅ 支持文件格式
+文档：pdf, docx, xlsx, pptx, txt
 
-- **文档类**：PDF、Word\(\.docx\)、PPT\(\.pptx\)、Excel\(\.xlsx\)
+音频：mp3, m4a, wav, flac
 
-- **视频类**：MP4
+视频：mp4, mov, avi, mkv, wmv
 
-- **音频类**：M4A、MP3、WAV
+🛠 **技术栈**
 
----
+前端：Streamlit
 
-## 💡 项目亮点（毕设加分项）
+后端：FastAPI + Uvicorn
 
-- ✅ **真正全格式解析**：市面多数系统仅支持PDF，本项目支持办公文档\+多媒体文件
+大模型：DeepSeek Chat
 
-- ✅ **表格细节精准问答**：可读取Excel表格行列数据，回答细节问题
+音视频转写：OpenAI Whisper
 
-- ✅ **真实音视频AI识别**：基于Whisper真实语音转文字，非虚假生成
+文档解析：PyPDF2 /python-docx/python-pptx /pandas
 
-- ✅ **严格基于原文作答**：杜绝AI幻觉，无信息则如实提示
+调试追踪：LangSmith
 
-- ✅ **前后端分离标准架构**：符合软件工程毕设规范
+✅ **已解决问题**
 
-- ✅ **界面美观、交互完整**：侧边栏上传\+历史记录，主面板摘要问答
+支持 m4a /mp4 / 视频文件上传与解析
 
----
+修复 LangSmith 连接报错
 
-## ❓ 常见问题解决
+修复 Windows 10054 连接重置问题
 
-#### 1\. ffmpeg 无法识别
+修复前端 “后端连接失败” 提示
 
-解决方案：使用 winget 重装 ffmpeg 并重启终端。
+支持无文件通用问答
 
-#### 2\. 音视频无法生成摘要
+支持历史记录展开 / 收起
 
-原因：未安装 FFmpeg 或环境变量未生效。
-
-#### 3\. 问答答不出表格细节
-
-当前版本已深度优化，**完整读取表格所有行列数据**，可精准回答所有细节问题。
-
-#### 4\. 依赖报错
-
-执行上方全部依赖安装命令即可一次性修复。
-
----
-
+支持页面切换（摘要 ↔ 历史记录）
